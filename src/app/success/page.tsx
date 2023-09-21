@@ -1,7 +1,7 @@
 "use client";
+import dynamic from "next/dynamic";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
-import ConfettiExplosion from "react-confetti-explosion";
 
 const SuccessPage = () => {
   const router = useRouter();
@@ -11,7 +11,7 @@ const SuccessPage = () => {
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        await fetch(`http://localhost:3000/api/confirm/${payment_intent}`, {
+        await fetch(`${process.env.NEXTAUTH_URL}/api/confirm/${payment_intent}`, {
           method: "PUT",
         });
         setTimeout(() => {
@@ -32,8 +32,8 @@ const SuccessPage = () => {
           Payment successful. You are being redirected to the orders page.
           Please do not close the page.
         </p>
-      <ConfettiExplosion className="absolute m-auto"
-      />
+      
+    
       </div>
     </>
   );
