@@ -51,10 +51,7 @@ const AddPage = () => {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
-  const addOptions=(e)=>{
-    e.preventDefault()
-    setOptions((prev) => [...prev, option])
-  }
+
   const changeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOption((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
@@ -68,22 +65,22 @@ const AddPage = () => {
   };
 
   const upload = async () => {
-    try{
+    try {
       const data = new FormData();
-    data.append("file", file!);
-    data.append("upload_preset", "restaurant");
-    data.append("cloud_name", "drl9gdm1l");
+      data.append("file", file!);
+      data.append("upload_preset", "restaurant");
+      data.append("cloud_name", "drl9gdm1l");
 
-    const res = await fetch("https://api.cloudinary.com/v1_1/drl9gdm1l/image/upload", {
-      method: "POST",
-      body: data,
-    });
+      const res = await fetch("https://api.cloudinary.com/v1_1/drl9gdm1l/image/upload", {
+        method: "POST",
+        body: data,
+      });
 
-    const resData = await res.json();
-    console.log(resData)
-    return resData.url;
-  }
-    catch(err){
+      const resData = await res.json();
+      console.log(resData)
+      return resData.url;
+    }
+    catch (err) {
       console.log(err)
     }
   }
@@ -190,7 +187,7 @@ const AddPage = () => {
             />
             <button
               className="bg-gray-500 p-2 text-white"
-              onClick={addOptions}
+              onClick={() => setOptions((prev) => [...prev, option])}
             >
               Add Option
             </button>

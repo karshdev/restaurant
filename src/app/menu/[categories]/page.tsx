@@ -1,7 +1,5 @@
 
 
-
-
 import { Product } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,6 +19,7 @@ const getData=async (categories:string)=>{
   return res.json()
  }
 const CategoryPage = async({params}:props) => {
+  
   const products:Product[]=await getData(params.categories) 
   return (
     <div className="flex flex-wrap text-red-500">

@@ -5,12 +5,12 @@ import Menu from './Menu'
 import CartIcon from "./CartIcon"
 import Phone from 'public/phone.png'
 import Image from 'next/image'
-import { useSession } from 'next-auth/react'
+
 
 import { useCartStore } from '@/utils/store'
 import UserLinks from './UserLinks'
+
 const Navbar = () => {
-    const user=false;
   return (
     <div className='h-12 text-red-500 p-4 flex  items-center justify-between border-b-2 border-b-red-500 uppercase md:h-16'>
         <div className='hidden md:flex gap-4'>
