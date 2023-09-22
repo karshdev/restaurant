@@ -7,7 +7,7 @@ import React from "react";
 
 const LoginPage = () => {
   const { data, status } = useSession()
-  console.log("data ke andar:"+ data)
+  console.log("data"+ data)
   console.log("status:"+ status)
   const router=useRouter()
 if(status==="loading"){
