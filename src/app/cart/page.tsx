@@ -6,53 +6,54 @@ import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
 const CartPage = () => {
-  const{data:session}=useSession()
-  const router=useRouter()
-  const {products,totalItems,totalPrice,removeFromCart}=useCartStore()
+  const { data: session } = useSession()
+  const router = useRouter()
+  const { products, totalItems, totalPrice, removeFromCart } = useCartStore()
   useEffect(() => {
     useCartStore.persist.rehydrate();
   }, []);
-  const handleCheckout=async ()=>{
+  const handleCheckout = async () => {
 
-if(!session){
- router.push("/")
-}else{
-  try{
-    const res=await fetch(`/api/orders`,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        price:totalPrice,
-        products,
-        status:"Not Paid!!",
-        userEmail:session.user.email
-      })
-    })
-    const data=await res.json()
-    console.log(data)
-    router.push(`/pay/${data.id}`)
+    if (!session) {
+      router.push("/")
+    } else {
+      try {
+        // error
+        const res = await fetch(`/api/orders`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            price: totalPrice,
+            products,
+            status: "Not Paid!!",
+            userEmail: session.user.email
+          })
+        })
+        const data = await res.json()
+        console.log(data)
+        router.push(`/pay/${data.id}`)
 
-  }catch(err){
-    console.log(err)
-  }
-}
+      } catch (err) {
+        console.log(err)
+      }
+    }
   }
   return (
     <div className="h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col text-red-500 lg:flex-row">
       {/* PRODUCTS CONTAINER */}
       <div className="h-1/2 p-4 flex flex-col justify-center overflow-scroll lg:h-full lg:w-2/3 2xl:w-1/2 lg:px-20 xl:px-40">
         {/* SINGLE ITEM */}
-       {products?.map((item)=>(
-        <div className="flex items-center justify-between mb-4" key={item.id}>
-          {item.img &&  (<Image src="/temporary/p1.png" alt="" width={100} height={100} />)}
-          <div className="">
-            <h1 className="uppercase text-xl font-bold">{item.title} X{item.quantity}</h1>
-            <span>{item.optionTitle}</span>
+        {products?.map((item) => (
+          <div className="flex items-center justify-between mb-4" key={item.id}>
+            {item.img && (<Image src="/temporary/p1.png" alt="" width={100} height={100} />)}
+            <div className="">
+              <h1 className="uppercase text-xl font-bold">{item.title} X{item.quantity}</h1>
+              <span>{item.optionTitle}</span>
+            </div>
+            <h2 className="font-bold">{item.price}</h2>
+            <span className="cursor-pointer" onClick={() => removeFromCart(item)}>X</span>
           </div>
-          <h2 className="font-bold">{item.price}</h2>
-          <span className="cursor-pointer" onClick={()=>removeFromCart(item)}>X</span>
-        </div>
-       ))}
+        ))}
       </div>
       {/* PAYMENT CONTAINER */}
       <div className="h-1/2 p-4 bg-fuchsia-50 flex flex-col gap-4 justify-center lg:h-full lg:w-1/2 2xl:w-1/2 lg:px-20 xl:px-40 2xl:text-xl 2xl:gap-6">
