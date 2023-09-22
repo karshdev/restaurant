@@ -12,7 +12,7 @@ console.log(id)
     useEffect(()=>{
        const makrequest=async ()=>{
          try{ 
-            const res=await fetch(`${process.env.NEXTAUTH_URL}/api/create-intent/${id}`,{
+            const res=await fetch(`/api/create-intent/${id}`,{
                 method:"POST",
 
             })
