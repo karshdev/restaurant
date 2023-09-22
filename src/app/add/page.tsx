@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { MouseEventHandler, useState } from "react";
+import React, { useState } from "react";
 
 type Inputs = {
   title: string;
