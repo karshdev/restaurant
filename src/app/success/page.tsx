@@ -1,7 +1,8 @@
 "use client";
-import dynamic from "next/dynamic";
+
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
+import axios from "axios";
 
 const SuccessPage = () => {
   const router = useRouter();
@@ -11,8 +12,8 @@ const SuccessPage = () => {
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        await fetch(`/api/confirm/${payment_intent}`, {
-          method: "PUT",
+        await axios.put(`/api/confirm/${payment_intent}`, {
+
         });
         setTimeout(() => {
           router.push("/orders");

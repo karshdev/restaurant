@@ -3,7 +3,8 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { MouseEventHandler, useState } from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 type Inputs = {
   title: string;
@@ -90,16 +91,13 @@ const AddPage = () => {
 
     try {
       const url = await upload();
-      const res = await fetch(`/api/products`, {
-        method: "POST",
-        body: JSON.stringify({
-          img: url,
-          ...inputs,
-          options,
-        }),
+      const res = await axios.post(`/api/products`, {
+        img: url,
+        ...inputs,
+        options,
       });
 
-      const data = await res.json();
+      const data = await res.data;
 
       // router.push(`/product/${data.id}`);
     } catch (err) {

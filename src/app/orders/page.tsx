@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const OrdersPage = () => {
   const{data:session,status}=useSession()
@@ -16,19 +17,15 @@ const OrdersPage = () => {
   const { isLoading, error, data } = useQuery({
     queryKey: ['orders'],
     queryFn: () =>
-      fetch(`/api/orders`).then(
-        (res) => res.json(),
+      axios.get(`/api/orders`).then(
+        (res) => res.data,
       ),
   })
   const queryClient = useQueryClient  ();
   const mutation = useMutation({
     mutationFn: ({ id, status }: { id: string; status: string }) => {
-      return fetch(`/api/orders/${id}`, {
-        method:"PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(status),
+      return axios.put(`/api/orders/${id}`, {
+       status
       });
     },
     onSuccess() {
