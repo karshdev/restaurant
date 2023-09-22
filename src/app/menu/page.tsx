@@ -12,7 +12,6 @@ const getData=async ()=>{
    throw new Error("failed")
  }
 const val=await res.json()
-
  return val
 
  
@@ -23,7 +22,7 @@ const MenuPage =async  () => {
   const menu:Menu=await getData()
   return (
     <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col md:flex-row items-center">
-      {menu.map((category) => (
+      {menu?.map((category) => (
         <Link
           href={`/menu/${category.slug}`}
           key={category.id}

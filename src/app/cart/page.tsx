@@ -18,7 +18,7 @@ if(!session){
  router.push("/")
 }else{
   try{
-    const res=await fetch(`/api/orders`,{
+    const res=await fetch(`${process.env.NEXTAUTH_URL}/api/orders`,{
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({

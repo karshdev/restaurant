@@ -11,7 +11,7 @@ const SuccessPage = () => {
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        await fetch(`/api/confirm/${payment_intent}`, {
+        await fetch(`${process.env.NEXTAUTH_URL}/api/confirm/${payment_intent}`, {
           method: "PUT",
         });
         setTimeout(() => {

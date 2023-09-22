@@ -90,7 +90,7 @@ const AddPage = () => {
 
     try {
       const url = await upload();
-      const res = await fetch(`/api/products`, {
+      const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products`, {
         method: "POST",
         body: JSON.stringify({
           img: url,
