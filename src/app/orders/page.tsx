@@ -14,7 +14,7 @@ const OrdersPage = () => {
   if(status==="unauthenticated")[
     router.push("/")
   ]
-  const { isLoading, error, data } = useQuery({
+  const { isLoading, data } = useQuery({
     queryKey: ['orders'],
     queryFn: () =>
       axios.get(`/api/orders`).then(
