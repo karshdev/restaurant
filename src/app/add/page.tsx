@@ -190,7 +190,7 @@ const AddPage = () => {
             </button>
           </div>
           <div className="flex flex-wrap gap-4 mt-2">
-            {options.map((opt) => (
+            {options?.map((opt) => (
               <div
                 key={opt.title}
                 className="p-2  rounded-md cursor-pointer bg-gray-200 text-gray-400"
