@@ -6,13 +6,18 @@ import React from "react";
 
 
 const getData=async ()=>{
-  const res=await fetch(`${process.env.NEXTAUTH_URL}/api/products`,{
- cache:"no-store"
-  })
-  if(!res.ok){
-    throw new Error("failed")
+  try{
+    const res=await fetch(`${process.env.NEXTAUTH_URL}/api/products`,{
+      cache:"no-store"
+       })
+     if(!res.ok){
+       throw new Error("failed")
+     }
+     return res.json()
+  }catch(error){
+console.log("Fetch error",error);
   }
-  return res.json()
+  
  }
 const Featured = async() => {
   const featuredProducts:Product[]=await getData()

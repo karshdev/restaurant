@@ -7,13 +7,18 @@ import React from "react";
 
 
 const getData=async (id:string)=>{
-  const res=await fetch(`${process.env.NEXTAUTH_URL}/api/products/${id}`,{
- cache:"no-store"
-  })
-  if(!res.ok){
-    throw new Error("failed")
+  try{
+    const res=await fetch(`${process.env.NEXTAUTH_URL}/api/products/${id}`,{
+      cache:"no-store"
+       })
+     if(!res.ok){
+       throw new Error("failed")
+     }
+     return res.json()
+  }catch(error){
+console.log("Fetch error",error);
   }
-  return res.json()
+  
  }
 
 const SingleProductPage = async ({params}:{params:{id:string}}) => {
