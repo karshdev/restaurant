@@ -10,7 +10,7 @@ type props={
 
 const getData=async (categories:string)=>{
   const res=await fetch(`${process.env.NEXTAUTH_URL}/api/products?cat=${categories}`,{
- cache:"no-store"
+  cache:"no-store"
   })
   if(!res.ok){
     throw new Error("failed")
