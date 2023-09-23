@@ -1,5 +1,6 @@
 "use client"
 import { useCartStore } from "@/utils/store";
+import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -12,25 +13,20 @@ const CartPage = () => {
   useEffect(() => {
     useCartStore.persist.rehydrate();
   }, []);
-  const handleCheckout = async () => {
 
+  const handleCheckout = async () => {
     if (!session) {
       router.push("/")
     } else {
       try {
         // error
-        const res = await fetch(`/api/orders`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            price: totalPrice,
+        const res = await axios.post(`/api/orders`, {
+          price: totalPrice,
             products,
             status: "Not Paid!!",
             userEmail: session.user.email
           })
-        })
-        const data = await res.json()
-        console.log(data)
+        const data = await res.data
         router.push(`/pay/${data.id}`)
 
       } catch (err) {

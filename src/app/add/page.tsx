@@ -72,13 +72,12 @@ const AddPage = () => {
       data.append("upload_preset", "restaurant");
       data.append("cloud_name", "drl9gdm1l");
 
-      const res = await fetch("https://api.cloudinary.com/v1_1/drl9gdm1l/image/upload", {
-        method: "POST",
-        body: data,
+      const res = await axios.post("https://api.cloudinary.com/v1_1/drl9gdm1l/image/upload", {
+        data
       });
 
-      const resData = await res.json();
-      console.log(resData)
+      const resData = await res.data;
+      
       return resData.url;
     }
     catch (err) {
@@ -99,7 +98,7 @@ const AddPage = () => {
 
       const data = await res.data;
 
-      // router.push(`/product/${data.id}`);
+      router.push(`/product/${data.id}`);
     } catch (err) {
       console.log(err);
     }

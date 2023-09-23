@@ -11,10 +11,7 @@ const getData=async ()=>{
  if(!res.ok){
    throw new Error("failed")
  }
-
  return res.json()
-
- 
 }
 
 

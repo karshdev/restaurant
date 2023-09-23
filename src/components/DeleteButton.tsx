@@ -1,4 +1,5 @@
 "use client"
+import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import React from 'react'
@@ -13,14 +14,12 @@ const DeleteButton = ({id}:{id:string}) => {
     return
     }
     const handleDelete=async ()=>{
- const res=await fetch(`/api/products/${id}`,{
-    method:"DELETE"
- })
+ const res=await axios.delete(`/api/products/${id}`)
  if(res.status===200){
     router.push("/menu")
  }else{
-    const data=await res.json()
-    console.log(data.message)
+    const data=await res.data
+  
  }
     }
   return (
