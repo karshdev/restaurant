@@ -1,5 +1,8 @@
 "use client";
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 import axios from "axios";
