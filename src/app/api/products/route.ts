@@ -28,6 +28,8 @@ return new NextResponse(JSON.stringify(products),{status:200})
 export const POST = async (req: NextRequest) => {
   try {
     const body = await req.json();
+    console.log("Body of product",body);
+    
     const product = await prisma.product.create({
       data: body,
     });  

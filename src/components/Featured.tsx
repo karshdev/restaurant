@@ -21,6 +21,8 @@ console.log("Fetch error",error);
  }
 const Featured = async() => {
   const featuredProducts:Product[]=await getData()
+  console.log("FEATURED PRODUCTS",featuredProducts);
+  
   return (
     <div className="w-screen overflow-x-scroll text-red-500 scrollbar-hide ">
       {/* WRAPPER */}

@@ -21,7 +21,7 @@ export const useCartStore = create(
         );
 
         if (productInState) {
-          const updatedProducts = products?.map((product) =>
+          const updatedProducts = products.map((product) =>
             product.id === productInState.id
               ? {
                   ...item,

@@ -13,7 +13,7 @@ const getData=async ()=>{
      }
      return res.json()
   }catch(error){
-console.log("Fetch error",error);
+   console.log("Fetch error",error);
   }
  
 

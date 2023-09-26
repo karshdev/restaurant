@@ -55,15 +55,23 @@ const AddPage = () => {
 
   const changeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOption((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
+      let value:number | string=e.target.value
+      if(e.target.type==="number"){
+        value=Number(value)
+      }
+      return { ...prev, [e.target.name]:value };
     });
   };
+
+
+  
 
   const handleChangeImg = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
     const item = (target.files as FileList)[0];
     setFile(item);
   };
+
 
   const upload = async () => {
     try {
@@ -72,11 +80,14 @@ const AddPage = () => {
       data.append("upload_preset", "restaurant");
       data.append("cloud_name", "drl9gdm1l");
 
-      const res = await axios.post("https://api.cloudinary.com/v1_1/drl9gdm1l/image/upload", {
-        data
+      const res = await fetch("https://api.cloudinary.com/v1_1/drl9gdm1l/image/upload", {
+        method: "POST",
+        body: data,
       });
 
-      const resData = await res.data;
+      const resData = await res.json();
+
+      console.log(resData);
       
       return resData.url;
     }
@@ -90,6 +101,8 @@ const AddPage = () => {
 
     try {
       const url = await upload();
+      console.log("PHOTA KA URL",url);
+      
       const res = await axios.post(`/api/products`, {
         img: url,
         ...inputs,
@@ -97,8 +110,8 @@ const AddPage = () => {
       });
 
       const data = await res.data;
-
       router.push(`/product/${data.id}`);
+     
     } catch (err) {
       console.log(err);
     }
@@ -184,6 +197,7 @@ const AddPage = () => {
             />
             <button
               className="bg-gray-500 p-2 text-white"
+              type="button"
               onClick={() => setOptions((prev) => [...prev, option])}
             >
               Add Option

@@ -12,7 +12,7 @@ export type Menu = {
     desc?: string;
     img?: string;
     price: number;
-    options?: { title: string; additionalPrice: number }[];
+    options?: { title: string;additionalPrice: number }[];
   };
   export type OrderType = {
     id: string;
